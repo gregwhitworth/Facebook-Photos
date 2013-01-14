@@ -1,11 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-	require_once PATH_THIRD."facebook_photos/config.php";
-
-	class Facebook_Photos_upd {
+	class FBPhotos_upd {
 
 		var $version = '1.0';
-		var $module_name = 'Facebook_Photos';
 
 		function __construct()
 	    {
@@ -20,8 +17,8 @@
 		{
 
 			$data = array(
-				'module_name'	=> 'Facebook_Photos',
-				'module_version'	=> $this->version,
+				'module_name'	=> 'Fbphotos',
+				'module_version'	=> '1.0',
 				'has_cp_backend'	=> 'y',
 				'has_publish_fields' => 'n'
 			);
@@ -29,29 +26,6 @@
 			$this->EE->db->insert('modules', $data);
 
 			$this->EE->load->dbforge();
-
-			// Create Album Table
-			$fields = array(
-		        'id' => array(
-		            'type' => 'int',
-		            'constraint' => '10',
-		            'unsigned' => TRUE,
-		            'auto_increment'=> TRUE
-		        ),
-		        'album_id' => array(
-		            'type' => 'int',
-		            'constraint' => '50',
-		            'unsigned' => TRUE,
-		            'null' => FALSE
-		        )
-		    );
-
-			$this->EE->dbforge->add_field( $fields );
-			$this->EE->dbforge->add_key('id');
-
-			$this->EE->dbforge->create_table('fb_photo_albums');
-
-			unset($fields);
 
 			// Create Facebook Settings Table
 			$fields = array(
@@ -84,6 +58,13 @@
 			);
 			$this->EE->db->insert('fb_photo_settings', $data);
 
+
+			$albums_default = serialize( array( 'checked' => array('default'), 'unchecked' => array('default') ) );
+			$data = array(
+				'setting_name'  => 'facebook_albums',
+				'setting_value' => $albums_default
+			);
+			$this->EE->db->insert('fb_photo_settings', $data);
 			return true; 
 		}
 
@@ -93,18 +74,17 @@
 		function uninstall() 
 		{ 
 			$this->EE->db->select('module_id');
-			$query = $this->EE->db->get_where('modules', array('module_name' => 'Facebook_Photos'));
+			$query = $this->EE->db->get_where('modules', array('module_name' => 'Fbphotos'));
 
-			$this->EE->db->where('module_name', 'Facebook_Photos');
+			$this->EE->db->where('module_name', 'Fbphotos');
 			$this->EE->db->delete('modules');
 
-			$this->EE->db->where('class', 'Facebook_Photos');
+			$this->EE->db->where('class', 'Fbphotos');
 			$this->EE->db->delete('actions');
 
 			$this->EE->load->dbforge();
 
 			$this->EE->dbforge->drop_table('fb_photo_settings');
-			$this->EE->dbforge->drop_table('fb_photo_albums');
 
 			return true; 
 		}
