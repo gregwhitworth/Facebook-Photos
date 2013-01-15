@@ -41,9 +41,9 @@
 					form_checkbox( $data )
 				);
 			}
-		}
 
-		echo $this->table->generate();
+			echo $this->table->generate();
+		}
 
 		if( isset($facebook_albums['unchecked']) )
 		{

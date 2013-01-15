@@ -50,7 +50,7 @@ class Fbphotos_mcp extends Fbphotos_base {
     // =================================================
     private function get_facebook_photo_albums( $selected_albums )
     {
-        $result = parent::get_facebook_graph_data( 'albums' );  
+        $result = parent::get_facebook_graph_data( $this->facebook_id, 'albums' );  
         $albums = array();
 
         if( $result )

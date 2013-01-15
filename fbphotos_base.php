@@ -14,7 +14,7 @@
 		    $this->fb_graph_uri = 'http://graph.facebook.com';
 		    $this->fb_settings_table = 'fb_photo_settings';
 		    $this->facebook_id = $this->get_setting_value( 'facebook_id' );
-		    $this->get_facebook_graph_data( '' );  
+		    $this->get_facebook_graph_data( $this->facebook_id, '' );  
 	    }
 
 	    // =================================================
@@ -40,9 +40,9 @@
 	    // @return object
 	    // @param string : api_ext
 	    // =================================================
-	    public function get_facebook_graph_data( $api_ext )
+	    public function get_facebook_graph_data( $id, $api_ext )
 	    {
-	        $graph_uri = sprintf( '%s/%s/%s', $this->fb_graph_uri, $this->facebook_id, $api_ext );
+	        $graph_uri = sprintf( '%s/%s/%s', $this->fb_graph_uri, $id, $api_ext );
 	        $result = @file_get_contents( $graph_uri );
 
 	        if( $api_ext == 'albums' && ( !$result || $result == "" ) ) {
