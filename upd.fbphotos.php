@@ -1,5 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+	/** ----------------------------------------------- 
+	 *  Fbphotos Update
+	 *  -----------------------------------------------
+	 *  This will install, update and un-install the
+	 *  module.
+	 *  
+	 *  @package Fbphotos
+	 *  @author  Greg Whitworth
+	*/ 
+
 	class FBPhotos_upd {
 
 		var $version = '1.0';

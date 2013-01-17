@@ -1,5 +1,16 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+	/** ----------------------------------------------- 
+	 *  Fbphotos Base
+	 *  -----------------------------------------------
+	 *  The base file that provides the core vars and
+	 *  functions for the other files that inherit from
+	 *  it.
+	 *  
+	 *  @package Fbphotos
+	 *  @author  Greg Whitworth
+	*/ 
+
 	class Fbphotos_base {
 
 	    protected $facebook_id;
@@ -17,14 +28,14 @@
 		    $this->get_facebook_graph_data( $this->facebook_id, '' );  
 	    }
 
-	    // =================================================
-	    // Get Setting Value
-	    // -------------------------------------------------
-	    // Will return the selected setting from the 
-	    // exp_fb_photo_settings table.
-	    // -------------------------------------------------
-	    // @return str
-	    // =================================================
+	    /** =================================================
+	    //  Get Setting Value
+	    //  -------------------------------------------------
+	    //  Will return the selected setting from the 
+	    //  exp_fb_photo_settings table.
+	    //  -------------------------------------------------
+	    //  @return str
+	    //  ================================================= */
 	    public function get_setting_value( $setting_name )
 	    {
 	        $query = $this->EE->db->get_where( $this->fb_settings_table, array('setting_name' => $setting_name ) );
@@ -32,14 +43,14 @@
 	        return $results->setting_value;
 	    }
 
-	    // =================================================
-	    // Get Facebook Graph Data
-	    // -------------------------------------------------
-	    // Does a facebook graph call and returns the object
-	    // -------------------------------------------------
-	    // @return object
-	    // @param string : api_ext
-	    // =================================================
+	    /** =================================================
+	    //  Get Facebook Graph Data
+	    //  -------------------------------------------------
+	    //  Does a facebook graph call and returns the object
+	    //  -------------------------------------------------
+	    //  @return object
+	    //  @param string : api_ext
+	    //  ================================================= */
 	    public function get_facebook_graph_data( $id, $api_ext )
 	    {
 	        $graph_uri = sprintf( '%s/%s/%s', $this->fb_graph_uri, $id, $api_ext );
