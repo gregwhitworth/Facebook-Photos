@@ -29,16 +29,12 @@ The tag pair that is used is called "get_photos" and is used like so:
 
 Parameters
 ----------
-- _limit_ : (Optional) This will default to 50 if not number is given, but allows you to give your own number and limit the amount of photos returned.
-- _size_ : (Optional) This determines what size image you want returned from the array of images that the Facebook Graph returns. By default it will use "medium".
-  
-**Available Sizes**
-xsmall, small, medium, large, xlarge
+- **limit** : (Optional) This will default to 50 if not number is given, but allows you to give your own number and limit the amount of photos returned.
+- **size** : (Optional) This determines what size image you want returned from the array of images that the Facebook Graph returns. By default it will use "medium".  
+_Available Sizes:_ xsmall, small, medium, large, xlarge
 
-- _thumbnail_ : (Optional) You only need to set this if you want to have a thumbnail at a different size that can link to a larger size.
-
-**Available Sizes**
-xsmall, small, medium, large, xlarge
+- **thumbnail** : (Optional) You only need to set this if you want to have a thumbnail at a different size that can link to a larger size.  
+_Available Sizes:_ xsmall, small, medium, large, xlarge
 
 FAQs
 ----
