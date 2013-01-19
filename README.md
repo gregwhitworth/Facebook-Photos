@@ -14,7 +14,7 @@ Installation
 
 Setup
 -----
-1. Insert you Facebook ID into the text area. [Click Here]: http://findmyfacebookid.com/ to find your Facebook ID using your Facebook URL.
+1. Insert you Facebook ID into the text area. [Click Here](http://findmyfacebookid.com) to find your Facebook ID using your Facebook URL.
 2. After clicking "Submit" you will then be shown the names of your public photo albums.
 3. Simply check the box of the albums that you want to pull images from.
 4. After clicking "Submit" you will now see that your selected albums are seperated out from your available albums
