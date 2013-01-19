@@ -29,23 +29,23 @@ The tag pair that is used is called "get_photos" and is used like so:
 
 Parameters
 ----------
-- ###_limit_ : (Optional) This will default to 50 if not number is given, but allows you to give your own number and limit the amount of photos returned.
-- ###_size_ : (Optional) This determines what size image you want returned from the array of images that the Facebook Graph returns. By default it will use "medium".
+- _limit_ : (Optional) This will default to 50 if not number is given, but allows you to give your own number and limit the amount of photos returned.
+- _size_ : (Optional) This determines what size image you want returned from the array of images that the Facebook Graph returns. By default it will use "medium".
   
 **Available Sizes**
 xsmall, small, medium, large, xlarge
 
-- ###_thumbnail_ : (Optional) You only need to set this if you want to have a thumbnail at a different size that can link to a larger size.
+- _thumbnail_ : (Optional) You only need to set this if you want to have a thumbnail at a different size that can link to a larger size.
 
 **Available Sizes**
 xsmall, small, medium, large, xlarge
 
 FAQs
 ----
-**Q: Why does it take so long for my images to load?**
+**Q: Why does it take so long for my images to load?**  
 **A:** Remember to limit how many are returned and switch up the sizes returned as well.
 
-**Q: Is there a way to cache the photos so that I don't have to have them load every time.?**
+**Q: Is there a way to cache the photos so that I don't have to have them load every time.?**  
 **A:** Not at this time, I made this so that my clients wouldn't have to go to their site to update their photos. If there is enought demand for cacheing I will setup a way to select your albums and then since the photos from Facebook into your database so that you will only have to call Facebook on sync only.
 
 Thank You
