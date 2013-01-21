@@ -7,7 +7,7 @@ This module is meant to help you display your Facebook photos from a public Face
 
 Installation
 ------------
-1. Just place all of the contents in the _/system/expressionengine/third_party/_
+1. Just place all of the contents in the _/system/expressionengine/third_party/fbphotos_
 2. Then log into your admin area and click on "Add Ons"->"Modules"
 3. Find "Facebook Photos" in the list and click on _install_
 4. Then from the Module's list click on the "Facebook Photos" link
