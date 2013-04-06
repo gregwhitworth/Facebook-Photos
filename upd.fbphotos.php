@@ -28,7 +28,7 @@
 
 			$data = array(
 				'module_name'	=> 'Fbphotos',
-				'module_version'	=> '1.0',
+				'module_version'	=> '1.1',
 				'has_cp_backend'	=> 'y',
 				'has_publish_fields' => 'n'
 			);
@@ -60,6 +60,29 @@
 
 			$this->EE->dbforge->create_table('fb_photo_settings');
 
+			// Create Facebook Settings Table
+			$fields = array(
+		        'id' => array(
+		            'type' => 'int',
+		            'constraint' => '10',
+		            'unsigned' => TRUE,
+		            'auto_increment'=> TRUE
+		        ),
+		        'photo_url' => array(
+		            'type' => 'varchar',
+		            'constraint' => '300'
+		        ),
+		        'photo_caption' => array(
+		            'type' => 'varchar',
+		            'constraint' => '1000'
+		        )
+		    );
+
+			$this->EE->dbforge->add_field( $fields );
+			$this->EE->dbforge->add_key('id');
+
+			$this->EE->dbforge->create_table('fb_photo_images');
+
 			// POPULATE Settings
 			// =============================================
 			$data = array(
@@ -68,6 +91,11 @@
 			);
 			$this->EE->db->insert('fb_photo_settings', $data);
 
+			$data = array(
+				'setting_name'  => 'facebook_sync',
+				'setting_value' => "true"
+			);
+			$this->EE->db->insert('fb_photo_settings', $data);
 
 			$albums_default = serialize( array( 'checked' => array('default'), 'unchecked' => array('default') ) );
 			$data = array(
@@ -95,6 +123,7 @@
 			$this->EE->load->dbforge();
 
 			$this->EE->dbforge->drop_table('fb_photo_settings');
+			$this->EE->dbforge->drop_table('fb_photo_images');
 
 			return true; 
 		}

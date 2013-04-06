@@ -16,7 +16,9 @@
 	    protected $facebook_id;
 	    protected $fb_graph_uri;
 	    protected $fb_settings_table;
+	    protected $fb_photos_table;
 	    protected $valid_fb_id;
+	    protected $facebook_sync;
 	    protected $data;
 
 	    public function __construct()
@@ -24,8 +26,10 @@
 	        $this->EE =& get_instance();
 		    $this->fb_graph_uri = 'http://graph.facebook.com';
 		    $this->fb_settings_table = 'fb_photo_settings';
+		    $this->fb_photos_table = 'fb_photo_images';
 		    $this->facebook_id = $this->get_setting_value( 'facebook_id' );
-		    $this->get_facebook_graph_data( $this->facebook_id, '' );  
+		    $this->facebook_sync = $this->get_setting_value( 'facebook_sync' );
+		    $this->get_facebook_graph_data( $this->facebook_id, '' );
 	    }
 
 	    /** =================================================

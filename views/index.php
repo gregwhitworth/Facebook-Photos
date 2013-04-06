@@ -18,6 +18,29 @@
 
 	echo $this->table->generate();
 
+
+	$this->table->set_template($cp_table_template);
+	$this->table->set_caption('Facebook Data Sync');
+	if( $facebook_sync == "true" ) {
+		$checked = true;
+	}
+	else {
+		$checked = false;
+	}
+
+	$this->table->add_row(
+		lang( 'Facebook Data Sync<br/><span style="font-weight: normal; font-size: .8em;">This will allow you to sync the image locations in your database so that the Facebook Graph is not called on load.</span>', 'facebook_sync'),
+		form_checkbox( array(
+							'name' => 'facebook_sync',
+							'id' => 'facebook_sync',
+							'value' => $facebook_sync,
+							'checked' => $checked
+					)
+		)
+	);
+
+	echo $this->table->generate();
+
 	if( isset( $facebook_albums ) )
 	{
 		

@@ -38,7 +38,8 @@ require_once('fbphotos_base.php');
 
             $this->data = array(
                 'form_action'     => $this->_base_url . AMP . 'method=save_settings',
-                'facebook_id'     => $this->facebook_id
+                'facebook_id'     => $this->facebook_id,
+                'facebook_sync'   => $this->facebook_sync
             );   
 
             if( $this->valid_fb_id )
@@ -90,8 +91,9 @@ require_once('fbphotos_base.php');
         {
             $post_items = array(
                     'facebook_id' => $this->EE->input->post('facebook_id'),
-                    'facebook_albums' => serialize( $this->EE->input->post('facebook_albums') )
-            );
+                    'facebook_albums' => serialize( $this->EE->input->post('facebook_albums') ),
+                    'facebook_sync' => $this->EE->input->post('facebook_sync')
+            );            
 
             foreach( $post_items as $key => $value )
             {
@@ -100,6 +102,26 @@ require_once('fbphotos_base.php');
                 );
                 $this->EE->db->where('setting_name', $key);
                 $this->EE->db->update( 'exp_' . $this->fb_settings_table , $data);
+            }
+
+            if($post_items['facebook_sync'] == true)
+            {
+                $this->EE->db->query('TRUNCATE TABLE ' . $this->EE->db->dbprefix($this->fb_photos_table) . ';');
+                foreach( $this->EE->input->post('facebook_albums') as $album )
+                {
+                    $photo_data = $this->get_facebook_graph_data( $album, 'photos' );
+                    foreach( $photo_data->data as $photo ) {
+                        $images = $photo->images;
+                        $image_data[] = array(
+                            "photo_url" => $images[0]->source, 
+                            "photo_caption" => @$photo->name
+                        );
+                    }
+                }
+                foreach( $image_data as $data )
+                {
+                    $this->EE->db->insert($this->fb_photos_table, $data);
+                }
             }
 
             $this->EE->functions->redirect( BASE . AMP . $this->_base_url );

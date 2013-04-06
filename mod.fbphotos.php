@@ -71,6 +71,26 @@ require_once('fbphotos_base.php');
             return $image;
         }
 
+        function get_photos_sync()
+        {
+            $limit   = intval( $this->EE->TMPL->fetch_param('limit') );
+            $query   = sprintf("SELECT * FROM %s ORDER BY id LIMIT 0, %d", 
+                                $this->EE->db->dbprefix($this->fb_photos_table),
+                                $limit
+                               );
+            $results = $this->EE->db->query( $query );
+
+            foreach( $results->result_array() as $row )
+            {
+                $data[] = array(
+                                "source" => $row['photo_url'], 
+                                "name" => @$row['photo_caption']
+                            );
+            }
+
+            return $this->EE->TMPL->parse_variables($this->EE->TMPL->tagdata, $data);
+        }
+
         /** =================================================
         //  Get Photos
         //  -------------------------------------------------
