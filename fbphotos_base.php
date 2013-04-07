@@ -29,7 +29,9 @@
 		    $this->fb_photos_table = 'fb_photo_images';
 		    $this->facebook_id = $this->get_setting_value( 'facebook_id' );
 		    $this->facebook_sync = $this->get_setting_value( 'facebook_sync' );
-		    $this->get_facebook_graph_data( $this->facebook_id, '' );
+		    if(!$this->facebook_sync) {
+		    	$this->get_facebook_graph_data( $this->facebook_id, '' );
+			}
 	    }
 
 	    /** =================================================
