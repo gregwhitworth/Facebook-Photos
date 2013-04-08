@@ -21,11 +21,13 @@
 
 	$this->table->set_template($cp_table_template);
 	$this->table->set_caption('Facebook Data Sync');
-	if( $facebook_sync == "true" ) {
+	if( $facebook_sync == true ) {
 		$checked = true;
+                $value = false;
 	}
 	else {
 		$checked = false;
+		$value = true;
 	}
 
 	$this->table->add_row(
@@ -33,7 +35,7 @@
 		form_checkbox( array(
 							'name' => 'facebook_sync',
 							'id' => 'facebook_sync',
-							'value' => $facebook_sync,
+							'value' => $value,
 							'checked' => $checked
 					)
 		)

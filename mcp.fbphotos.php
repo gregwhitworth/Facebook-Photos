@@ -42,11 +42,8 @@ require_once('fbphotos_base.php');
                 'facebook_sync'   => $this->facebook_sync
             );   
 
-            if( $this->valid_fb_id )
-            {
                 $selected_albums = unserialize( parent::get_setting_value( 'facebook_albums' ) );
                 $this->get_facebook_photo_albums( $selected_albums );
-            }
 
             return $this->EE->load->view('index', $this->data, TRUE);
         }
