@@ -98,4 +98,19 @@
 	echo form_submit(array('name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'));
 	echo form_close();
 
+	if(isset($debug)) {
+		echo '<br/><br/>';
+		$this->table->set_template($cp_table_template);
+		$this->table->set_heading(array(array('style' => 'width: 50%', 'data' => lang('Name')), lang('Value')));
+		$this->table->set_caption('Debugging Information');
+
+		foreach( $debug as $item=>$value ) {
+			$this->table->add_row(lang($item), lang($value));
+		}
+
+		echo $this->table->generate();
+	}
+
+
+
 ?>

@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require 'facebook-php-sdk/src/facebook.php';
 require_once('fbphotos_base.php');
 
     /** ----------------------------------------------- 
@@ -40,7 +41,12 @@ require_once('fbphotos_base.php');
                 'form_action'     => $this->_base_url . AMP . 'method=save_settings',
                 'facebook_id'     => $this->facebook_id,
                 'facebook_sync'   => $this->facebook_sync
-            );   
+            );
+
+            if($this->debug) {
+                $this->data['debug']['facebook_id'] = $this->facebook_id;
+                $this->data['debug']['facebook_url'] = sprintf( '%s/%s', $this->fb_graph_uri, $this->facebook_id );
+            }
 
                 $selected_albums = unserialize( parent::get_setting_value( 'facebook_albums' ) );
                 $this->get_facebook_photo_albums( $selected_albums );
@@ -61,7 +67,11 @@ require_once('fbphotos_base.php');
             $result = parent::get_facebook_graph_data( $this->facebook_id, 'albums' );  
             $albums = array();
 
-            if( $result )
+            if($this->debug) {
+                $this->data['debug']['facebook_albums_result'] = $result;
+            }
+
+            if( $result && is_array($result))
             {
                 foreach( $result->data as $info ) {
                     if( @in_array( $info->id, $selected_albums ))

@@ -11,7 +11,7 @@
 	 *  @author  Greg Whitworth
 	*/ 
 
-	class Fbphotos_base {
+		class Fbphotos_base {
 
 	    protected $facebook_id;
 	    protected $fb_graph_uri;
@@ -20,15 +20,21 @@
 	    protected $valid_fb_id;
 	    protected $facebook_sync;
 	    protected $data;
+	    protected $debug;
+	    protected $accessToken;
+	    protected $appID;
 
 	    public function __construct()
-	    {  
+	    {
+	    	$this->accessToken = $this->facebook->getAccessToken();
 	        $this->EE =& get_instance();
 		    $this->fb_graph_uri = 'http://graph.facebook.com';
 		    $this->fb_settings_table = 'fb_photo_settings';
 		    $this->fb_photos_table = 'fb_photo_images';
 		    $this->facebook_id = $this->get_setting_value( 'facebook_id' );
 		    $this->facebook_sync = $this->get_setting_value( 'facebook_sync' );
+		    $this->debug = false;
+
 		    if(!$this->facebook_sync) {
 		    	$this->get_facebook_graph_data( $this->facebook_id, '' );
 			}
@@ -60,7 +66,13 @@
 	    public function get_facebook_graph_data( $id, $api_ext )
 	    {
 	        $graph_uri = sprintf( '%s/%s/%s', $this->fb_graph_uri, $id, $api_ext );
-	        $result = @file_get_contents( $graph_uri );
+	        $result = file_get_contents( $graph_uri );
+
+	        if($this->debug) {
+	        	$this->data['debug']['facebook_url_' . $api_ext] = $graph_uri;
+	        	$this->data['debug']['api_extension'] = $api_ext;
+	        	$this->data['debug']['api_json_returned'] = $result;
+	        }
 
 	        if( $api_ext == 'albums' && ( !$result || $result == "" ) ) {
 	            return $this->data['message'] = 'Your Facebook account is set to private, we can not pull albums from your account.';
