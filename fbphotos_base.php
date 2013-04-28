@@ -26,7 +26,6 @@
 
 	    public function __construct()
 	    {
-	    	$this->accessToken = $this->facebook->getAccessToken();
 	        $this->EE =& get_instance();
 		    $this->fb_graph_uri = 'http://graph.facebook.com';
 		    $this->fb_settings_table = 'fb_photo_settings';

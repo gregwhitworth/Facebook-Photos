@@ -1,6 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require 'facebook-php-sdk/src/facebook.php';
 require_once('fbphotos_base.php');
 
     /** ----------------------------------------------- 
